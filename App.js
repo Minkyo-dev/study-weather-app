@@ -1,20 +1,108 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
+import React, { useState } from "react";
 
-export default function App() {
+const App = () => {
+  const [number, setNumber] = useState(0);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
+      <View style={styles.cityCon}>
+        <Text style={styles.city}>Toronto</Text>
+      </View>
+      <ScrollView horizontal contentContainerStyle={styles.weather}>
+        <View style={styles.weatherInner}>
+          <View style={styles.day}>
+            <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
+            <Text style={styles.desc}>Sunny</Text>
+          </View>
+          <View style={styles.tempCon}>
+            <Text style={styles.temp}>24</Text>
+          </View>
+        </View>
+        <View style={styles.weatherInner}>
+          <View style={styles.day}>
+            <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
+            <Text style={styles.desc}>Sunny</Text>
+          </View>
+          <View style={styles.tempCon}>
+            <Text style={styles.temp}>24</Text>
+          </View>
+        </View>
+        <View style={styles.weatherInner}>
+          <View style={styles.day}>
+            <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
+            <Text style={styles.desc}>Sunny</Text>
+          </View>
+          <View style={styles.tempCon}>
+            <Text style={styles.temp}>24</Text>
+          </View>
+        </View>
+        <View style={styles.weatherInner}>
+          <View style={styles.day}>
+            <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
+            <Text style={styles.desc}>Sunny</Text>
+          </View>
+          <View style={styles.tempCon}>
+            <Text style={styles.temp}>24</Text>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#ffe01a",
+  },
+  cityCon: {
+    flex: 1,
+  },
+  city: {
+    flex: 1,
+    marginTop: 50,
+    paddingTop: 20,
+    fontSize: 40,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  weather: {},
+  weatherInner: {
+    flex: 2,
+  },
+  day: {
+    flex: 0.2,
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  regDate: {
+    paddingTop: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 15,
+    backgroundColor: "black",
+    color: "white",
+    fontWeight: "bold",
+    borderRadius: 20,
+    overflow: "hidden",
+  },
+  desc: {
+    marginTop: 20,
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+  tempCon: {
+    flex: 0.3,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  temp: {
+    fontSize: 120,
   },
 });
+
+export default App;
