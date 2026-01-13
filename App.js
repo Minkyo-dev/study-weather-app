@@ -1,18 +1,53 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 import { Dimensions } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as Location from 'expo-location';
 
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+// const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const App = () => {
-  const [number, setNumber] = useState(0);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [city, setCity] = useState(null);
+
+  // 허가 여부
+  const [permmited, setPermitted] = useState(true);
+
+  const locationData = async () => {
+    // 권한 요청
+    const { granted } = await Location.requestForegroundPermissionsAsync();
+    console.log(granted);
+    if (!granted) {
+      setPermitted(false);
+      setErrorMsg("위치에 대한 권한 부여가 거부되었습니다.");
+      return;
+    }
+    
+    // 좌표 가져오기
+    const { coords: { latitude, longitude } } = await Location.getCurrentPositionAsync({accuracy: 5});
+    console.log(latitude);
+    console.log(longitude);
+
+    const address = await Location.reverseGeocodeAsync({latitude, longitude}, {useGoogleMaps: false});
+    console.log(address);
+
+    const cityAddr = address[0].city;
+    setCity(cityAddr);
+    console.log(cityAddr);
+
+  }
+
+  useEffect(() => {
+    locationData();
+  }, []);
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.cityCon}>
-        <Text style={styles.city}>Toronto</Text>
+        <Text style={styles.city}>{city}</Text>
       </View>
       <View style={styles.regDateCon}>
         <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
@@ -20,7 +55,7 @@ const App = () => {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.weather}
+        contentContainerStyle={styles.weatherCon}
       >
         <View style={styles.weatherInner}>
           <View style={styles.day}>
@@ -89,7 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
   },
-  weather: {},
+  weatherCon: {},
   weatherInner: {
     flex: 0.5,
     width: SCREEN_WIDTH,
