@@ -1,6 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
+import { Dimensions } from "react-native";
 import React, { useState } from "react";
+
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 const App = () => {
   const [number, setNumber] = useState(0);
@@ -11,10 +14,16 @@ const App = () => {
       <View style={styles.cityCon}>
         <Text style={styles.city}>Toronto</Text>
       </View>
-      <ScrollView horizontal contentContainerStyle={styles.weather}>
+      <View style={styles.regDateCon}>
+        <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
+      </View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.weather}
+      >
         <View style={styles.weatherInner}>
           <View style={styles.day}>
-            <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
             <Text style={styles.desc}>Sunny</Text>
           </View>
           <View style={styles.tempCon}>
@@ -23,7 +32,6 @@ const App = () => {
         </View>
         <View style={styles.weatherInner}>
           <View style={styles.day}>
-            <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
             <Text style={styles.desc}>Sunny</Text>
           </View>
           <View style={styles.tempCon}>
@@ -32,7 +40,6 @@ const App = () => {
         </View>
         <View style={styles.weatherInner}>
           <View style={styles.day}>
-            <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
             <Text style={styles.desc}>Sunny</Text>
           </View>
           <View style={styles.tempCon}>
@@ -41,7 +48,6 @@ const App = () => {
         </View>
         <View style={styles.weatherInner}>
           <View style={styles.day}>
-            <Text style={styles.regDate}>1월 11일, 일, 10:05</Text>
             <Text style={styles.desc}>Sunny</Text>
           </View>
           <View style={styles.tempCon}>
@@ -59,7 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffe01a",
   },
   cityCon: {
-    flex: 1,
+    flex: 0.3,
   },
   city: {
     flex: 1,
@@ -69,15 +75,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
-  weather: {},
-  weatherInner: {
-    flex: 2,
-  },
-  day: {
-    flex: 0.2,
-    textAlign: "center",
+  regDateCon: {
     alignItems: "center",
-    justifyContent: "center",
   },
   regDate: {
     paddingTop: 10,
@@ -89,6 +88,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     borderRadius: 20,
     overflow: "hidden",
+  },
+  weather: {},
+  weatherInner: {
+    flex: 0.5,
+    width: SCREEN_WIDTH,
+  },
+  day: {
+    flex: 0.1,
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   desc: {
     marginTop: 20,
