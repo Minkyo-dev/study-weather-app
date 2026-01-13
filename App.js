@@ -7,6 +7,9 @@ import * as Location from 'expo-location';
 // const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
+const apiKey = process.env.EXPO_PUBLIC_GOOGLE_GEO_API_KEY;
+console.log("apiKey : ", apiKey);
+
 const App = () => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
